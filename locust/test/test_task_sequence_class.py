@@ -14,21 +14,22 @@ class TestTaskSet(LocustTestCase):
 
         class User(Locust):
             host = "127.0.0.1"
+
         self.locust = User()
 
     def test_task_sequence_with_list(self):
         def t1(l):
-          if l._index == 1:
-            l.t1_executed = True
+            if l._index == 1:
+                l.t1_executed = True
 
         def t2(l):
-          if l._index == 2:
-            l.t2_executed = True
+            if l._index == 2:
+                l.t2_executed = True
 
         def t3(l):
-          if l._index == 0:
-            l.t3_executed = True
-          raise InterruptTaskSet(reschedule=False)
+            if l._index == 0:
+                l.t3_executed = True
+            raise InterruptTaskSet(reschedule=False)
 
         class MyTaskSequence(TaskSequence):
             t1_executed = False
@@ -51,20 +52,20 @@ class TestTaskSet(LocustTestCase):
 
             @seq_task(1)
             def t1(self):
-              if self._index == 1:
-                self.t1_executed += 1
+                if self._index == 1:
+                    self.t1_executed += 1
 
             @seq_task(2)
             @task(3)
             def t2(self):
-              if self._index == 2 or self._index == 3 or self._index == 4:
-                l.t2_executed += 1
+                if self._index == 2 or self._index == 3 or self._index == 4:
+                    l.t2_executed += 1
 
             @seq_task(3)
             def t3(self):
-              if self._index == 0:
-                self.t3_executed += 1
-              raise InterruptTaskSet(reschedule=False)
+                if self._index == 0:
+                    self.t3_executed += 1
+                raise InterruptTaskSet(reschedule=False)
 
         l = MyTaskSequence(self.locust)
 

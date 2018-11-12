@@ -1,6 +1,7 @@
 html {
     height: 100%;
 }
+
 body {
     background: #173529;
     padding: 0;
@@ -26,6 +27,7 @@ a {
     color: #2be6a4;
     text-decoration: none;
 }
+
 a:hover {
     color: #4ff9bd;
 }
@@ -40,12 +42,15 @@ a:hover {
     left: 0px;
     z-index: 2;
 }
+
 .top a {
     color: #308dbf;
 }
+
 .top-content {
     padding-top: 20px;
 }
+
 .top .logo {
     float: left;
     width: 200px;
@@ -53,9 +58,8 @@ a:hover {
     margin-top: 2px;
 }
 
-
 .top .boxes {
-    float:right;
+    float: right;
 }
 
 .top_box {
@@ -65,14 +69,17 @@ a:hover {
     padding-right: 20px;
     height: 53px;
 }
+
 .top_box:first-child {
     border: none;
 }
+
 .top_box .label {
     color: #7a7a7a;
     font-size: 11px;
     font-weight: bold;
 }
+
 .top_box .value {
     color: #000;
     font-size: 16px;
@@ -80,15 +87,19 @@ a:hover {
     max-width: 165px;
     word-wrap: break-word;
 }
+
 .boxes .box_rps .value, .boxes .box_slaves .value {
     font-size: 32px;
 }
+
 .boxes .box_fail .value {
     font-size: 22px;
 }
+
 .boxes .box_status .value {
     text-transform: uppercase;
 }
+
 .top_box .stop-button {
     display: block;
     float: left;
@@ -101,9 +112,11 @@ a:hover {
     font-weight: bold;
     margin-right: 12px;
 }
+
 .top_box .stop-button:hover {
     background: #c80202;
 }
+
 .top_box .stop-button i {
     display: block;
     background: #fff;
@@ -112,8 +125,9 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 7px;
-    box-shadow: 0 0 20px rgba(255,255,255, 0.5)
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5)
 }
+
 .top_box .reset-button {
     display: block;
     float: left;
@@ -126,6 +140,7 @@ a:hover {
     font-size: 11px;
     font-weight: bold;
 }
+
 .top_box .reset-button:hover {
     background: #4e4141;
 }
@@ -134,13 +149,26 @@ a:hover {
     font-size: 14px;
     font-weight: normal;
 }
+
 .boxes .box_running {
     display: none;
 }
-.hatching .boxes .box_running {display: block;}
-.running .boxes .box_running {display: block;}
-.stopped .boxes .box_running {display: block;}
-.stopped .boxes .box_stop {display: none;}
+
+.hatching .boxes .box_running {
+    display: block;
+}
+
+.running .boxes .box_running {
+    display: block;
+}
+
+.stopped .boxes .box_running {
+    display: block;
+}
+
+.stopped .boxes .box_stop {
+    display: none;
+}
 
 .container {
     max-width: 1800px;
@@ -169,17 +197,20 @@ a:hover {
     padding: 30px;
     padding-top: 0px;
 }
+
 .start h2, .edit h2 {
     color: #addf82;
     font-size: 26px;
     font-weight: bold;
 }
+
 .start label, .edit label {
     display: block;
     margin-bottom: 10px;
     margin-top: 20px;
     font-size: 16px;
 }
+
 .start input.val, .edit input.val {
     border: none;
     background: #fff;
@@ -188,6 +219,7 @@ a:hover {
     font-size: 24px;
     padding-left: 10px;
 }
+
 .start button,
 .edit button {
     margin-top: 20px;
@@ -200,11 +232,11 @@ a:hover {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .start button:hover,
 .edit button:hover {
     background: #74b99d;
 }
-
 
 .stopped .start {
     display: none;
@@ -213,10 +245,13 @@ a:hover {
     -webkit-border-radisu: 5px;
     border: 3px solid #eee;
     background: #132b21;
-    box-shadow: 0 0 60px rgba(0,0,0,0.3);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
 }
 
-.stopped .edit {display: none;}
+.stopped .edit {
+    display: none;
+}
+
 .running .edit, .hatching .edit {
     display: none;
     border-radius: 5px;
@@ -224,34 +259,74 @@ a:hover {
     -webkit-border-radisu: 5px;
     border: 3px solid #eee;
     background: #132b21;
-    box-shadow: 0 0 60px rgba(0,0,0,0.3);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
 }
-.running .start, .hatching .start {display: none;}
 
-.ready .edit {display: none;}
-.ready .start {display: block;}
+.running .start, .hatching .start {
+    display: none;
+}
 
-.running .status, .hatching .status {display: block;}
-.stopped .status {display: block;}
-.ready .status {display: none;}
+.ready .edit {
+    display: none;
+}
 
-.stopped .boxes .edit_test, .ready .boxes .edit_test {display: none;}
-.stopped .boxes .user_count, .ready .boxes .user_count {display: none;}
+.ready .start {
+    display: block;
+}
 
-.running a.new_test, .ready a.new_test, .hatching a.new_test {display: none;}
-.running a.new_test {display: none;}
-.stopped a.new_test {display: block;}
+.running .status, .hatching .status {
+    display: block;
+}
 
-.start a.close_link, .edit a.close_link{
+.stopped .status {
+    display: block;
+}
+
+.ready .status {
+    display: none;
+}
+
+.stopped .boxes .edit_test, .ready .boxes .edit_test {
+    display: none;
+}
+
+.stopped .boxes .user_count, .ready .boxes .user_count {
+    display: none;
+}
+
+.running a.new_test, .ready a.new_test, .hatching a.new_test {
+    display: none;
+}
+
+.running a.new_test {
+    display: none;
+}
+
+.stopped a.new_test {
+    display: block;
+}
+
+.start a.close_link, .edit a.close_link {
     position: absolute;
     right: 10px;
     top: 10px;
 }
-.stopped .start a.close_link {display: inline;}
-.running .start a.close_link, .ready .start a.close_link, .hatching .start a.close_link  {display: none;}
 
-.stopped .edit a.close_link, .ready .edit a.close_link {display: none;}
-.running .edit a.close_link, .hatching .edit a.close_link {display: inline;}
+.stopped .start a.close_link {
+    display: inline;
+}
+
+.running .start a.close_link, .ready .start a.close_link, .hatching .start a.close_link {
+    display: none;
+}
+
+.stopped .edit a.close_link, .ready .edit a.close_link {
+    display: none;
+}
+
+.running .edit a.close_link, .hatching .edit a.close_link {
+    display: inline;
+}
 
 .stats_label {
     cursor: pointer;
@@ -263,54 +338,68 @@ a:hover {
     border: 2px solid #11251c;
     border-spacing: 0;
 }
+
 .status thead {
     background: #11251c;
     padding: 0;
     margin: 0;
     color: #a9c5ba;
 }
+
 .status table thead tr:hover {
     background: none;
 }
+
 .status table tr:hover {
     background: #1d4434;
 }
+
 .status td, .status th {
     padding: 10px;
     margin: 0;
     text-align: left;
 }
+
 .status td:first-child, .status th:first-child {
     padding-left: 16px;
 }
+
 .status td:last-child, .status th:last-child {
     padding-right: 16px;
 }
+
 .status td.numeric,
 .status th.numeric {
     text-align: right;
 }
+
 .status tr.dark {
-    background:#153126;
+    background: #153126;
 }
+
 .status th {
     font-weight: bold;
 }
+
 .status th.error_count {
     width: 70px;
 }
+
 .status tr.total {
     background: #11251c;
 }
+
 .status tr.total td {
     font-weight: bold;
 }
+
 .status td {
     max-width: 450px;
     overflow: hidden;
     white-space: no-wrap;
     text-overflow: ellipsis;
 }
+
 @media (max-width: 1100px) {
     .status td {
         max-width: 350px;
@@ -325,6 +414,7 @@ a:hover {
     width: 110px;
     text-align: center;
 }
+
 #exceptions th.exception_traceback {
     text-align: left;
 }
@@ -332,6 +422,7 @@ a:hover {
 #exceptions td.occurences {
     text-align: center;
 }
+
 #exceptions td.traceback {
     font-size: 12px;
     line-height: 18px;
@@ -342,6 +433,7 @@ a:hover {
 #charts {
     width: 100%;
 }
+
 #charts .chart {
     height: 350px;
     margin-bottom: 30px;
@@ -349,6 +441,7 @@ a:hover {
     border: 1px solid #11271e;
     border-radius: 3px;
 }
+
 #charts .note {
     color: #b3c3bc;
     margin-bottom: 30px;
@@ -370,14 +463,17 @@ em {
 nav.menu {
     background: #132b21;
 }
+
 ul.tabs {
     overflow: hidden
 }
+
 ul.tabs li {
     display: block;
     float: left;
     font-size: 16px;
 }
+
 ul.tabs li a {
     padding: 14px 10px;
     display: inline-block;
@@ -386,12 +482,15 @@ ul.tabs li a {
     font-weight: 600;
     font-size: 14px;
 }
+
 ul.tabs li a:hover {
     background: #10211a;
 }
+
 ul.tabs li a.current {
     color: #fff;
 }
+
 ul.tabs li a.current:after {
     content: "";
     display: block;
@@ -406,6 +505,7 @@ ul.tabs li a.current:after {
 .panes {
     margin-top: 30px;
 }
+
 .panes > div {
     overflow: hidden;
 }
@@ -421,14 +521,16 @@ ul.tabs li a.current:after {
     -webkit-border-radius: 5px;
     border: 3px solid #eee;
     background: #132b21;
-    box-shadow: 0 0 60px rgba(0,0,0,0.3);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
     z-index: 1;
 }
+
 .about a.close_link {
     position: absolute;
     right: 10px;
     top: 10px;
 }
+
 .about .padder {
     padding: 30px;
     padding-top: 0px;

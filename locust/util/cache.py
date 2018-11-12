@@ -10,7 +10,8 @@ def memoize(timeout, dynamic_timeout=False):
     If dynamic_timeout is set, the cache timeout is doubled if the cached function 
     takes longer time to run than the timeout time
     """
-    cache = {"timeout":timeout}
+    cache = {"timeout": timeout}
+
     def decorator(func):
         def wrapper(*args, **kwargs):
             start = time()
@@ -21,13 +22,14 @@ def memoize(timeout, dynamic_timeout=False):
                 if dynamic_timeout and cache["time"] - start > cache["timeout"]:
                     cache["timeout"] *= 2
             return cache["result"]
-        
+
         def clear_cache():
             if "time" in cache:
                 del cache["time"]
             if "result" in cache:
                 del cache["result"]
-        
+
         wrapper.clear_cache = clear_cache
         return wrapper
+
     return decorator

@@ -1,5 +1,6 @@
 import gevent
 
+
 class EventHook(object):
     """
     Simple event class used to provide hooks for different types of events in Locust.
@@ -32,6 +33,7 @@ class EventHook(object):
             self._handlers.reverse()
         for handler in self._handlers:
             handler(**kwargs)
+
 
 request_success = EventHook()
 """

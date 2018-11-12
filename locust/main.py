@@ -24,6 +24,7 @@ from .util.time import parse_timespan
 _internals = [Locust, HttpLocust]
 version = locust.__version__
 
+
 def parse_options():
     """
     Handle command-line options with optparse.OptionParser.
@@ -47,7 +48,7 @@ def parse_options():
         default="",
         help="Host to bind the web interface to. Defaults to '' (all interfaces)"
     )
-    
+
     parser.add_option(
         '-P', '--port', '--web-port',
         type="int",
@@ -55,7 +56,7 @@ def parse_options():
         default=8089,
         help="Port on which to run web host"
     )
-    
+
     parser.add_option(
         '-f', '--locustfile',
         dest='locustfile',
@@ -100,7 +101,7 @@ def parse_options():
         default=False,
         help="Set locust to run in distributed mode with this process as slave"
     )
-    
+
     # master host options
     parser.add_option(
         '--master-host',
@@ -110,7 +111,7 @@ def parse_options():
         default="127.0.0.1",
         help="Host or IP address of locust master for distributed load testing. Only used when running with --slave. Defaults to 127.0.0.1."
     )
-    
+
     parser.add_option(
         '--master-port',
         action='store',
@@ -128,7 +129,7 @@ def parse_options():
         default="*",
         help="Interfaces (hostname, ip) that locust master should bind to. Only used when running with --master. Defaults to * (all available interfaces)."
     )
-    
+
     parser.add_option(
         '--master-bind-port',
         action='store',
@@ -175,7 +176,7 @@ def parse_options():
         default=1,
         help="The rate per second in which clients are spawned. Only used together with --no-web"
     )
-    
+
     # Time limit of the test run
     parser.add_option(
         '-t', '--run-time',
@@ -185,7 +186,7 @@ def parse_options():
         default=None,
         help="Stop after the specified amount of time, e.g. (300s, 20m, 3h, 1h30m, etc.). Only used together with --no-web"
     )
-    
+
     # log level
     parser.add_option(
         '--loglevel', '-L',
@@ -195,7 +196,7 @@ def parse_options():
         default='INFO',
         help="Choose between DEBUG/INFO/WARNING/ERROR/CRITICAL. Default is INFO.",
     )
-    
+
     # log file
     parser.add_option(
         '--logfile',
@@ -205,7 +206,7 @@ def parse_options():
         default=None,
         help="Path to log file. If not set, log will go to stdout/stderr",
     )
-    
+
     # if we should print stats in the console
     parser.add_option(
         '--print-stats',
@@ -217,11 +218,11 @@ def parse_options():
 
     # only print summary stats
     parser.add_option(
-       '--only-summary',
-       action='store_true',
-       dest='only_summary',
-       default=False,
-       help='Only print the summary stats'
+        '--only-summary',
+        action='store_true',
+        dest='only_summary',
+        default=False,
+        help='Only print the summary stats'
     )
 
     parser.add_option(
@@ -237,7 +238,7 @@ def parse_options():
         default=False,
         help="Reset statistics once hatching has been completed. Should be set on both master and slaves when running in distributed mode",
     )
-    
+
     # List locust commands found in loaded locust files/source files
     parser.add_option(
         '-l', '--list',
@@ -246,7 +247,7 @@ def parse_options():
         default=False,
         help="Show list of possible locust classes and exit"
     )
-    
+
     # Display ratio table of all tasks
     parser.add_option(
         '--show-task-ratio',
@@ -263,7 +264,7 @@ def parse_options():
         default=False,
         help="print json data of the locust classes' task execution ratio"
     )
-    
+
     # Version number (optparse gives you --version but we have to do it
     # ourselves to get -V too. sigh)
     parser.add_option(
@@ -285,8 +286,8 @@ def _is_package(path):
     Is the given path a Python package?
     """
     return (
-        os.path.isdir(path)
-        and os.path.exists(os.path.join(path, '__init__.py'))
+            os.path.isdir(path)
+            and os.path.exists(os.path.join(path, '__init__.py'))
     )
 
 
@@ -378,13 +379,14 @@ def load_locustfile(path):
     locusts = dict(filter(is_locust, vars(imported).items()))
     return imported.__doc__, locusts
 
+
 def main():
     parser, options, arguments = parse_options()
 
     # setup logging
     setup_logging(options.loglevel, options.logfile)
     logger = logging.getLogger(__name__)
-    
+
     if options.show_version:
         print("Locust %s" % (version,))
         sys.exit(0)
@@ -423,10 +425,10 @@ def main():
     else:
         # list() call is needed to consume the dict_view object in Python 3
         locust_classes = list(locusts.values())
-    
+
     if options.show_task_ratio:
         console_logger.info("\n Task ratio per locust class")
-        console_logger.info( "-" * 80)
+        console_logger.info("-" * 80)
         print_task_ratio(locust_classes)
         console_logger.info("\n Total task ratio")
         console_logger.info("-" * 80)
@@ -435,12 +437,12 @@ def main():
     if options.show_task_ratio_json:
         from json import dumps
         task_data = {
-            "per_class": get_task_ratio_dict(locust_classes), 
+            "per_class": get_task_ratio_dict(locust_classes),
             "total": get_task_ratio_dict(locust_classes, total=True)
         }
         console_logger.info(dumps(task_data))
         sys.exit(0)
-    
+
     if options.run_time:
         if not options.no_web:
             logger.error("The --run-time argument can only be used together with --no-web")
@@ -450,18 +452,21 @@ def main():
         except ValueError:
             logger.error("Valid --run-time formats are: 20, 20s, 3m, 2h, 1h20m, 3h30m10s, etc.")
             sys.exit(1)
+
         def spawn_run_time_limit_greenlet():
             logger.info("Run time limit set to %s seconds" % options.run_time)
+
             def timelimit_stop():
                 logger.info("Time limit reached. Stopping Locust.")
                 runners.locust_runner.quit()
+
             gevent.spawn_later(options.run_time, timelimit_stop)
 
     if not options.no_web and not options.slave:
         # spawn web greenlet
         logger.info("Starting web monitor at %s:%s" % (options.web_host or "*", options.port))
         main_greenlet = gevent.spawn(web.start, locust_classes, options)
-    
+
     if not options.master and not options.slave:
         runners.locust_runner = LocalLocustRunner(locust_classes, options)
         # spawn client spawning/hatching greenlet
@@ -473,7 +478,7 @@ def main():
     elif options.master:
         runners.locust_runner = MasterLocustRunner(locust_classes, options)
         if options.no_web:
-            while len(runners.locust_runner.clients.ready)<options.expect_slaves:
+            while len(runners.locust_runner.clients.ready) < options.expect_slaves:
                 logging.info("Waiting for slaves to be ready, %s of %s connected",
                              len(runners.locust_runner.clients.ready), options.expect_slaves)
                 time.sleep(1)
@@ -492,7 +497,7 @@ def main():
         except socket.error as e:
             logger.error("Failed to connect to the Locust master: %s", e)
             sys.exit(-1)
-    
+
     if not options.only_summary and (options.print_stats or (options.no_web and not options.slave)):
         # spawn stats printing greenlet
         gevent.spawn(stats_printer)
@@ -503,7 +508,6 @@ def main():
     if options.jsonfilebase:
         gevent.spawn(stats_writer_json, options.jsonfilebase)
 
-    
     def shutdown(code=0):
         """
         Shut down locust by firing quitting event, printing/writing stats and exiting
@@ -523,13 +527,14 @@ def main():
             write_stat_json(options.jsonfilebase)
         print_error_report()
         sys.exit(code)
-    
+
     # install SIGTERM handler
     def sig_term_handler():
         logger.info("Got SIGTERM signal")
         shutdown(0)
+
     gevent.signal(signal.SIGTERM, sig_term_handler)
-    
+
     try:
         logger.info("Starting Locust %s" % version)
         main_greenlet.join()
@@ -539,6 +544,7 @@ def main():
         shutdown(code=code)
     except KeyboardInterrupt as e:
         shutdown(0)
+
 
 if __name__ == '__main__':
     main()
